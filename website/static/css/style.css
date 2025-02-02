@@ -1,0 +1,118 @@
+@import url(./clash-display.css);
+
+/* VARIABLES */
+:root {
+  --c-dark: #2c0000;
+  --c-brand: #cb0915;
+  --c-brand-light: #fcfcfc;
+  --c-brand-rgb: 42, 108, 162;
+  --c-body: #080808;
+  --font-base: "ClashDisplay", sans-serif;
+  --box-shadow: 0px 15px 25px rgba(0, 0, 0, 0.08);
+  --transition: all 0.5s ease;
+}
+
+body {
+  font-family: var(--font-base);
+  background-image: url(../images/bgmainblurred.jpg);
+  color: var(--c-dark);
+}
+
+.navbar {
+  box-shadow: var(--box-shadow);
+  border-bottom: var(--c-brand) 3px solid;
+  background-color: #242424;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6 {
+  font-weight: 600;
+  color: var(--c-brand-light);
+}
+
+p {
+  color: white;
+}
+
+a {
+  font-size: 17px;
+  text-decoration: none;
+  
+}
+
+a:hover {
+  color: var(--c-brand-light);
+}
+
+.navbar-nav .nav-link.active,
+.navbar-nav .nav-link.show {
+  color: var(--c-brand);
+  font-size: 19px;
+  font-family: var(--font-base);
+}
+
+.list-group-item {
+    position: relative;
+    display: block;
+    padding: var(--bs-list-group-item-padding-y) var(--bs-list-group-item-padding-x);
+    color: var(--c-brand-light);
+    text-decoration: none;
+    background-color: rgba(82, 81, 82, 0.5);;
+    border: var(--bs-list-group-border-width) solid var(--c-brand);
+}
+
+.d-flex .btn {
+  background: var(--c-brand);
+  border: 2px solid var(--c-dark);
+  border-radius: 8px;
+  color: #fff;
+}
+.d-flex .btn:hover {
+  background: var(--c-dark);
+  border: 2px solid var(--c-brand);
+}
+
+#right1 :hover {
+  color: var(--c-brand);
+  transition: 300ms;
+}
+
+.row .right2 {
+  margin-left: -10px;
+  height: 180px;
+  width: 180px;
+  border-radius: 10px;
+}
+
+.container .row .col .row .col a {
+  background-color: var(--c-brand);
+  padding: 10px;
+  border-radius: 10px;
+  text-decoration: none;
+  color: white;
+}
+
+.container .row .col .row .col a :hover {
+  background-color: var(--c-brand);
+}
+#column :hover {
+  transform: scale(0.9);
+  transition: 450ms;
+  border-radius: 10px;
+}
+
+#items :hover {
+  color: var(--c-brand);
+  transition: 200ms;
+}
+
