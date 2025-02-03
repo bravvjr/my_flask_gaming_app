@@ -10,6 +10,9 @@ load_dotenv()
 # Initialize SQLAlchemy
 db = SQLAlchemy()
 
+# Initialize Flask-Login
+login_manager = LoginManager()
+
 def create_app():
     app = Flask(__name__)
 
@@ -21,26 +24,25 @@ def create_app():
     # Initialize SQLAlchemy with the app
     db.init_app(app)
 
+    # Initialize Flask-Login with the app
+    login_manager.init_app(app)
+    login_manager.login_view = 'auth.login'
+
     # Error handler for 404
     @app.errorhandler(404)
     def page_not_found(error):
         return render_template('404.html')
 
-    # Initialize Flask-Login
-    login_manager = LoginManager()
-    login_manager.init_app(app)
-    login_manager.login_view = 'auth.login'
-
     # User loader for Flask-Login
     @login_manager.user_loader
     def load_user(id):
+        from .models import Customer  # Import here to avoid circular imports
         return Customer.query.get(int(id))
 
     # Import and register blueprints
     from .views import views
     from .auth import auth
     from .admin import admin
-    from .models import Customer, Cart, Product, Order
 
     app.register_blueprint(views, url_prefix='/')
     app.register_blueprint(auth, url_prefix='/')

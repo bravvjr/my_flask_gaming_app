@@ -9,7 +9,6 @@ auth = Blueprint('auth', __name__)
 
 
 @auth.route('/sign-up', methods=['GET', 'POST'])
-@auth.route('/sign-up', methods=['GET', 'POST'])
 def sign_up():
     form = SignUpForm()
     if form.validate_on_submit():
@@ -38,14 +37,13 @@ def sign_up():
                 return redirect('/login')
             except Exception as e:
                 db.session.rollback()  # Rollback the transaction in case of an error
-                print(f"Error: {e}")
+                print(f"Error: {e}")  # Print the full error message
                 flash('An error occurred while creating the account. Please try again.')
         else:
             flash('Passwords do not match!!')
 
     return render_template('signup.html', form=form)
 
-@auth.route('/login', methods=['GET', 'POST'])
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
     form = LoginForm()
