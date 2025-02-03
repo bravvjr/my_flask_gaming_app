@@ -79,20 +79,23 @@
                     Account
                   </a>
                   <ul class="dropdown-menu" aria-labelledby="profileDropdown" style="background-color: #ff0000;">
-      
-                  
+
                     {% if current_user.is_authenticated %}
-                    <li><a class="dropdown-item" href="/profile/{{ current_user.id }}">Profile <i class="fa-solid fa-user"></i></a></li>
-                    <li><a class="dropdown-item" href="/orders">Orders <i class="fa-solid fa-truck-fast"></i></a></li>
-                    <li><a class="dropdown-item" href="/logout">Log Out <i class="fa-solid fa-right-from-bracket"></i></a></li>
-      
-                    {% else %}
+                      <li><a class="dropdown-item" href="/profile/{{ current_user.id }}">Profile <i class="fa-solid fa-user"></i></a></li>
+                      <li><a class="dropdown-item" href="/orders">Orders <i class="fa-solid fa-truck-fast"></i></a></li>
+                  
+                      {% if current_user.id == 1 %}
+                        <li><a class="dropdown-item" href="/admin-page">Admin<i class="fa-solid fa-toolbox"></i></a></li>
+                      {% endif %}
+                  
+                      <li><a class="dropdown-item" href="/logout">Log Out <i class="fa-solid fa-right-from-bracket"></i></a></li>
                     
-                    <li><a class="dropdown-item" href="/login">Login <i class="fa-solid fa-right-to-bracket"></i></a></li>
-      
+                    {% else %}
+                      <li><a class="dropdown-item" href="/login">Login <i class="fa-solid fa-right-to-bracket"></i></a></li>
                     {% endif %}
-      
+                  
                   </ul>
+                  
       
                 </li>
       
@@ -119,8 +122,8 @@
       
 
           <footer class="container-fluid  text-center p-2 mt-5" style="background-color: rgb(255, 0, 0); color: white;">
-            <a href="https://github.com/Frost-Codes" style="color: rgb(255, 0, 0);">Amazon</a> | <span>
-              <i class="fa-sharp fa-regular fa-copyright"></i></span> 2023 All rights reserved
+            <a href="https://github.com/bravvjr" style="color: rgb(255, 0, 0);">ORAGEN</a> | <span>
+              <i class="fa-sharp fa-regular fa-copyright"></i></span> 2025 Game on
       
           </footer>
           <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>

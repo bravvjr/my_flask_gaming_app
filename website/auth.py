@@ -18,10 +18,17 @@ def sign_up():
         password2 = form.password2.data
 
         if password1 == password2:
+            # Check if the email already exists
+            existing_customer = Customer.query.filter_by(email=email).first()
+            if existing_customer:
+                flash('Account Not Created!!, Email already exists')
+                return redirect('/sign-up')
+
+            # Create a new customer
             new_customer = Customer()
             new_customer.email = email
             new_customer.username = username
-            new_customer.password = password2
+            new_customer.password = password2  # This will hash the password
 
             try:
                 db.session.add(new_customer)
@@ -29,16 +36,13 @@ def sign_up():
                 flash('Account Created Successfully, You can now Login')
                 return redirect('/login')
             except Exception as e:
-                print(e)
-                flash('Account Not Created!!, Email already exists')
-
-            form.email.data = ''
-            form.username.data = ''
-            form.password1.data = ''
-            form.password2.data = ''
+                db.session.rollback()  # Rollback the transaction in case of an error
+                print(f"Error: {e}")  # Print the full error message
+                flash('An error occurred while creating the account. Please try again.')
+        else:
+            flash('Passwords do not match!!')
 
     return render_template('signup.html', form=form)
-
 
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
@@ -52,15 +56,14 @@ def login():
         if customer:
             if customer.verify_password(password=password):
                 login_user(customer)
+                flash('Logged in successfully!')
                 return redirect('/')
             else:
                 flash('Incorrect Email or Password')
-
         else:
-            flash('Account does not exist please Sign Up')
+            flash('Account does not exist. Please Sign Up.')
 
     return render_template('login.html', form=form)
-
 
 @auth.route('/logout', methods=['GET', 'POST'])
 @login_required

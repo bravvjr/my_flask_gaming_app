@@ -1,0 +1,6 @@
+#DB credentials
+
+.env/
+venv/
+instance/
+__pycache__/
