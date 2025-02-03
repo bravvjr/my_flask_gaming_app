@@ -1,5 +1,3 @@
-#DB credentials
-
 .env/
 venv/
 instance/
