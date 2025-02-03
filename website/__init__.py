@@ -22,6 +22,14 @@ def create_app():
     app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
     app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+    
+     # Print to debug on Render logs
+    print(f"Loaded SECRET_KEY from Render: {app.config['SECRET_KEY']}") 
+
+    if not app.config['SECRET_KEY']:
+        raise RuntimeError("SECRET_KEY is not set. Check your environment variables.")
+
+    return app
 
     # Initialize SQLAlchemy with the app
     db.init_app(app)
